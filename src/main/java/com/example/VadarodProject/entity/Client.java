@@ -3,6 +3,8 @@ package com.example.VadarodProject.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "client", schema = "work")
 @ToString
@@ -20,5 +22,5 @@ public class Client {
     private String phone;
     @OneToMany
     @ToString.Exclude
-    private Recipe recipe;
+    private List<Recipe> recipe;
 }

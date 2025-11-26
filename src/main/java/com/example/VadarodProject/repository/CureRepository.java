@@ -14,7 +14,7 @@ public interface CureRepository extends CrudRepository<Cure, Long> {
 
     List<Cure> findCureByIsNeedRecipe(boolean recipe);
 
-    @Query(value = "select c from Cure where c.name = :name")
+    @Query(value = "select c from Cure c where c.name =:name")
     List<Cure> findByQuery(@Param("name") String name);
 
     Page<Cure> findAll(Pageable pageable);
