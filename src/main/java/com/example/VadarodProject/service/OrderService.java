@@ -20,8 +20,9 @@ public class OrderService {
         return orderMapper.toDto(orderRepository.save(orderMapper.toEntity(order)));
     }
 
-    public void deleteOrder(OrderDto order) {
+    public OrderDto deleteOrder(OrderDto order) {
         orderRepository.delete(orderMapper.toEntity(order));
+        return order;
     }
 
     public OrderDto findById(Long id) {

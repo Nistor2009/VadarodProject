@@ -1,7 +1,6 @@
 package com.example.VadarodProject.mapper;
 
 import com.example.VadarodProject.dto.ClientDto;
-import com.example.VadarodProject.dto.ClientUpdateRequest;
 import com.example.VadarodProject.entity.Client;
 import com.example.VadarodProject.entity.Recipe;
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-11-26T21:08:10+0300",
+    date = "2025-11-30T21:35:24+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -57,34 +56,6 @@ public class ClientMapperImpl implements ClientMapper {
         }
 
         return client;
-    }
-
-    @Override
-    public void UpdateClient(Client client, ClientUpdateRequest updateRequest) {
-        if ( updateRequest == null ) {
-            return;
-        }
-
-        client.setName( updateRequest.getName() );
-        client.setSurname( updateRequest.getSurname() );
-        client.setAge( updateRequest.getAge() );
-        client.setPhone( updateRequest.getPhone() );
-        if ( client.getRecipe() != null ) {
-            List<Recipe> list = updateRequest.getRecipe();
-            if ( list != null ) {
-                client.getRecipe().clear();
-                client.getRecipe().addAll( list );
-            }
-            else {
-                client.setRecipe( null );
-            }
-        }
-        else {
-            List<Recipe> list = updateRequest.getRecipe();
-            if ( list != null ) {
-                client.setRecipe( new ArrayList<Recipe>( list ) );
-            }
-        }
     }
 
     @Override

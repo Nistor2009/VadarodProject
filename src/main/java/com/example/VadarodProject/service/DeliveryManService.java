@@ -20,8 +20,9 @@ public class DeliveryManService {
         return deliveryManMapper.toDto(deliveryManRepository.save(deliveryManMapper.toEntity(deliveryMan)));
     }
 
-    public void deleteDeliveryMan(DeliveryManDto deliveryMan) {
+    public DeliveryManDto deleteDeliveryMan(DeliveryManDto deliveryMan) {
         deliveryManRepository.delete(deliveryManMapper.toEntity(deliveryMan));
+        return deliveryMan;
     }
 
     public DeliveryManDto findById(Long id) {
