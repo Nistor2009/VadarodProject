@@ -1,8 +1,6 @@
 package com.example.VadarodProject.service;
 
 import com.example.VadarodProject.dto.PharmacyDto;
-import com.example.VadarodProject.dto.PharmacyDto;
-import com.example.VadarodProject.entity.Pharmacy;
 import com.example.VadarodProject.entity.Pharmacy;
 import com.example.VadarodProject.mapper.PharmacyMapper;
 import com.example.VadarodProject.repository.PharmacyRepository;
@@ -22,8 +20,9 @@ public class PharmacyService {
         return pharmacyMapper.toDto(pharmacyRepository.save(pharmacyMapper.toEntity(pharmacy)));
     }
 
-    public void deletePharmacy(PharmacyDto pharmacy) {
+    public PharmacyDto deletePharmacy(PharmacyDto pharmacy) {
         pharmacyRepository.delete(pharmacyMapper.toEntity(pharmacy));
+        return pharmacy;
     }
 
     public PharmacyDto findById(Long id) {

@@ -20,8 +20,9 @@ public class DeliveryService {
         return deliveryMapper.toDto(deliveryRepository.save(deliveryMapper.toEntity(delivery)));
     }
 
-    public void deleteDelivery(DeliveryDto delivery) {
+    public DeliveryDto deleteDelivery(DeliveryDto delivery) {
         deliveryRepository.delete(deliveryMapper.toEntity(delivery));
+        return delivery;
     }
 
     public DeliveryDto findById(Long id) {

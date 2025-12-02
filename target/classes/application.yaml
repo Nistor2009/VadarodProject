@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: VadarodProject
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 1322
+    url: jdbc:postgresql://localhost:5432/VadarodProject
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8080

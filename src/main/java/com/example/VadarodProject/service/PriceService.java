@@ -20,8 +20,9 @@ public class PriceService {
         return priceMapper.toDto(priceRepository.save(priceMapper.toEntity(price)));
     }
 
-    public void deletePrice(PriceDto price) {
+    public PriceDto deletePrice(PriceDto price) {
         priceRepository.delete(priceMapper.toEntity(price));
+        return price;
     }
 
     public PriceDto findById(Long id) {

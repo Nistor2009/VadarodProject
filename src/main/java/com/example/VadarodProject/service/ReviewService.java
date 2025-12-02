@@ -20,8 +20,9 @@ public class ReviewService {
         return reviewMapper.toDto(reviewRepository.save(reviewMapper.toEntity(review)));
     }
 
-    public void deleteReview(ReviewDto review) {
+    public ReviewDto deleteReview(ReviewDto review) {
         reviewRepository.delete(reviewMapper.toEntity(review));
+        return review;
     }
 
     public ReviewDto findById(Long id) {

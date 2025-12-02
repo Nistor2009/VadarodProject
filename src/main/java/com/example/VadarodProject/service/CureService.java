@@ -20,8 +20,9 @@ public class CureService {
         return cureMapper.toDto(cureRepository.save(cureMapper.toEntity(cure)));
     }
 
-    public void deleteCure(CureDto cure) {
+    public CureDto deleteCure(CureDto cure) {
         cureRepository.delete(cureMapper.toEntity(cure));
+        return cure;
     }
 
     public CureDto findById(Long id) {
