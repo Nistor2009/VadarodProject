@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class ReviewRestController {
     }
 
     @PostMapping("/add")
-    public ReviewDto addReview(@RequestBody ReviewDto reviewDto) {
+    public ReviewDto addReview(@RequestBody @Validated ReviewDto reviewDto) {
         return reviewService.addReview(reviewDto);
     }
 

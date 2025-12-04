@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class CureRestController {
     }
 
     @PostMapping("/add")
-    public CureDto addCure(@RequestBody CureDto cureDto) {
+    public CureDto addCure(@RequestBody @Validated CureDto cureDto) {
         return cureService.addCure(cureDto);
     }
 

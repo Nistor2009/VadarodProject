@@ -1,12 +1,12 @@
 package com.example.VadarodProject.controller;
 
 import com.example.VadarodProject.dto.ClientDto;
-import com.example.VadarodProject.dto.RecipeDto;
 import com.example.VadarodProject.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class ClientRestController {
     }
 
     @PostMapping("/add")
-    public ClientDto addClient(@RequestBody ClientDto clientDto) {
+    public ClientDto addClient(@RequestBody @Validated ClientDto clientDto) {
         return clientService.addClient(clientDto);
     }
 

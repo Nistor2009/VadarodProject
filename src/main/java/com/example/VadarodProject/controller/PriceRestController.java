@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class PriceRestController {
     }
 
     @PostMapping("/add")
-    public PriceDto addPrice(@RequestBody PriceDto priceDto) {
+    public PriceDto addPrice(@RequestBody @Validated PriceDto priceDto) {
         return priceService.addPrice(priceDto);
     }
 
