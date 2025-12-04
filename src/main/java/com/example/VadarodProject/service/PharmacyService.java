@@ -5,6 +5,10 @@ import com.example.VadarodProject.entity.Pharmacy;
 import com.example.VadarodProject.mapper.PharmacyMapper;
 import com.example.VadarodProject.repository.PharmacyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +34,12 @@ public class PharmacyService {
         return pharmacyMapper.toDto(pharmacy.orElse(new Pharmacy()));
     }
 
-    public List<PharmacyDto> findAll() {
-        return pharmacyMapper.toPharmacyDtoList((List<Pharmacy>) pharmacyRepository.findAll());
+    public List<PharmacyDto> findAll(int page,
+                                     int size,
+                                     String sort,
+                                     Sort.Direction sortDirection) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+        Page<Pharmacy> pageClient = pharmacyRepository.findAll(pageable);
+        return pharmacyMapper.toPharmacyDtoList(pageClient.get().toList());
     }
 }

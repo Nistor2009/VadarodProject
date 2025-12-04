@@ -1,0 +1,5 @@
+scrape_configs:
+  - job_name: 'vadarod-project'
+    metrics_path: '/actuator/prometheus' # Путь к эндпоинту с метриками
+    static_configs:
+      - targets: ['localhost:8080']

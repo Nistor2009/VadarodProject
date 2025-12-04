@@ -5,6 +5,10 @@ import com.example.VadarodProject.entity.Review;
 import com.example.VadarodProject.mapper.ReviewMapper;
 import com.example.VadarodProject.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +34,12 @@ public class ReviewService {
         return reviewMapper.toDto(review.orElse(new Review()));
     }
 
-    public List<ReviewDto> findAll() {
-        return reviewMapper.toReviewDtoList((List<Review>) reviewRepository.findAll());
+    public List<ReviewDto> findAll(int page,
+                                   int size,
+                                   String sort,
+                                   Sort.Direction sortDirection) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+        Page<Review> pageClient = reviewRepository.findAll(pageable);
+        return reviewMapper.toReviewDtoList(pageClient.get().toList());
     }
 }

@@ -5,6 +5,10 @@ import com.example.VadarodProject.entity.Cure;
 import com.example.VadarodProject.mapper.CureMapper;
 import com.example.VadarodProject.repository.CureRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +34,13 @@ public class CureService {
         return cureMapper.toDto(cure.orElse(new Cure()));
     }
 
-    public List<CureDto> findAll() {
-        return cureMapper.toCureDtoList((List<Cure>) cureRepository.findAll());
+    public List<CureDto> findAll(
+        int page,
+        int size,
+        String sort,
+        Sort.Direction sortDirection){
+            Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+            Page<Cure> pageClient = cureRepository.findAll(pageable);
+            return cureMapper.toCureDtoList(pageClient.get().toList());
     }
-
 }

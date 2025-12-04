@@ -21,6 +21,7 @@ com\example\VadarodProject\entity\Pharmacy.class
 com\example\VadarodProject\mapper\ClientMapperImpl.class
 com\example\VadarodProject\service\CureService.class
 com\example\VadarodProject\service\ReviewService.class
+com\example\VadarodProject\dto\ClientRequest.class
 com\example\VadarodProject\controller\PharmacyRestController.class
 com\example\VadarodProject\entity\Delivery.class
 com\example\VadarodProject\entity\Price.class

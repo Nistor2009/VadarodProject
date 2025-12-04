@@ -5,6 +5,10 @@ import com.example.VadarodProject.entity.DeliveryMan;
 import com.example.VadarodProject.mapper.DeliveryManMapper;
 import com.example.VadarodProject.repository.DeliveryManRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +34,12 @@ public class DeliveryManService {
         return deliveryManMapper.toDto(deliveryMan.orElse(new DeliveryMan()));
     }
 
-    public List<DeliveryManDto> findAll() {
-        return deliveryManMapper.toDeliveryManDtoList((List<DeliveryMan>) deliveryManRepository.findAll());
+    public List<DeliveryManDto> findAll(int page,
+                                        int size,
+                                        String sort,
+                                        Sort.Direction sortDirection) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+        Page<DeliveryMan> pageClient = deliveryManRepository.findAll(pageable);
+        return deliveryManMapper.toDeliveryManDtoList(pageClient.get().toList());
     }
 }

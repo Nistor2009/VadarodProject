@@ -5,6 +5,10 @@ import com.example.VadarodProject.entity.Price;
 import com.example.VadarodProject.mapper.PriceMapper;
 import com.example.VadarodProject.repository.PriceRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +34,12 @@ public class PriceService {
         return priceMapper.toDto(price.orElse(new Price()));
     }
 
-    public List<PriceDto> findAll() {
-        return priceMapper.toPriceDtoList((List<Price>) priceRepository.findAll());
+    public List<PriceDto> findAll(int page,
+                                  int size,
+                                  String sort,
+                                  Sort.Direction sortDirection) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+        Page<Price> pageClient = priceRepository.findAll(pageable);
+        return priceMapper.toPriceDtoList(pageClient.get().toList());
     }
 }

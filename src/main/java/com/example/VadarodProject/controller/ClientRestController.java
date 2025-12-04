@@ -4,11 +4,13 @@ import com.example.VadarodProject.dto.ClientDto;
 import com.example.VadarodProject.dto.RecipeDto;
 import com.example.VadarodProject.service.ClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,8 +31,16 @@ public class ClientRestController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<ClientDto>> getAllClient() {
-        List<ClientDto> clientDto = clientService.findAll();
+    public ResponseEntity<List<ClientDto>> getAllClient(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String direction) {
+        Sort.Direction sortDirection;
+        if (Objects.equals(direction, "asc")){
+            sortDirection = Sort.Direction.ASC;
+        } else sortDirection = Sort.Direction.DESC;
+        List<ClientDto> clientDto = clientService.findAll(page, size, sort, sortDirection);
         return new ResponseEntity<>(clientDto, HttpStatus.OK);
     }
 
@@ -44,8 +54,8 @@ public class ClientRestController {
         return clientService.deleteClient(clientDto);
     }
 
-    @PostMapping("/addRecipe")
-    public ClientDto addClient(@RequestParam("id") Long id, @RequestBody RecipeDto recipeDto) {
-        return clientService.addRecipe(id, recipeDto);
+    @PostMapping("/addRecipe/{id}/{recipeId}")
+    public ClientDto addRecipe(@PathVariable("id") Long id, @PathVariable("recipeId") Long recipeId) {
+        return clientService.addRecipe(id, recipeId);
     }
 }

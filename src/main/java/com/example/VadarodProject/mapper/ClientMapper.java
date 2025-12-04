@@ -14,9 +14,6 @@ public interface ClientMapper {
 
     Client toEntity(ClientDto clientDto);
 
-//    @Mapping(target = "id", ignore = true)
-//    void UpdateClient(@MappingTarget Client client, ClientUpdateRequest updateRequest);
-
     List<ClientDto> toClientDtoList(List<Client> clients);
     List<Client> toClientList(List<ClientDto> Dtos);
 

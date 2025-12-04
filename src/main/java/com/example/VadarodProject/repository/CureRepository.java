@@ -1,7 +1,6 @@
 package com.example.VadarodProject.repository;
 
 import com.example.VadarodProject.entity.Cure;
-import com.example.VadarodProject.entity.Recipe;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

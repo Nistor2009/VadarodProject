@@ -5,6 +5,10 @@ import com.example.VadarodProject.entity.Recipe;
 import com.example.VadarodProject.mapper.RecipeMapper;
 import com.example.VadarodProject.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +34,13 @@ public class RecipeService {
         return recipeMapper.toDto(recipe.orElse(new Recipe()));
     }
 
-    public List<RecipeDto> findAll() {
-        return recipeMapper.toRecipeDtoList((List<Recipe>) recipeRepository.findAll());
+    public List<RecipeDto> findAll(
+            int page,
+            int size,
+            String sort,
+            Sort.Direction sortDirection) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortDirection, sort));
+        Page<Recipe> pageClient = recipeRepository.findAll(pageable);
+        return recipeMapper.toRecipeDtoList(pageClient.get().toList());
     }
 }
